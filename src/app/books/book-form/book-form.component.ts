@@ -9,7 +9,7 @@ import { BooksService } from 'src/app/services/books.service';
 @Component({
   selector: 'app-book-form',
   templateUrl: './book-form.component.html',
-  styleUrls: ['./book-form.component.sass']
+  styleUrls: ['./book-form.component.scss']
 })
 
 export class BookFormComponent implements OnInit, OnDestroy {

@@ -1,21 +1,17 @@
 <h2> Book -List</h2>
-<table class="table table-striped">
-    <thead>
-        <th> Book ID</th>
-        <th> Title</th>
-        <th> Auther</th>
-        <th> Category</th>
-        <th> Price</th>
-        <th> image file</th>
-    </thead>
-    <tbody>
-        <tr *ngFor="let book of books">
-            <td>{{book.bookId}}</td>
-            <td>{{book.title}}</td>
-            <td>{{book.author}}</td>
-            <td>{{book.category}}</td>
-            <td>{{book.price}}</td>
-            <td>{{book.coverFileName}}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="flex-container">
+    <div *ngFor="let book of books">
+        <app-book-card [book]="book"></app-book-card>
+    </div>
+</div>
+
+<div>
+    current page: {{responseData?.pageNumber}}
+    total pages: {{responseData?.totalPages}}
+    total records: {{responseData?.totalRecords}}
+</div>
+<button class="btn btn-primary" type="button" (click)="next()"
+    [disabled]="responseData.pageNumber>=responseData.totalPages"> Next </button>
+
+<button class="btn btn-primary" type="button" (click)="prev()"> Prev </button>
+<a [routerLink]="['book']" [queryParams]="{ pageNumber:2 }">Page 2</a>

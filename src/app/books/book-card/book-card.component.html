@@ -1,0 +1,20 @@
+<mat-card class="example-card">
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{book.title}}</mat-card-title>
+        <!-- <mat-card-subtitle>{{book.author}}</mat-card-subtitle> -->
+    </mat-card-header>
+    <img mat-card-image src="{{environment.apiUrl}}/Images/{{book.coverFileName}}" alt=" book cover image">
+    <mat-card-content>
+        <div style="width:100%;  text-align: left;">
+            Author: {{book.author| personName: true}}
+            <br>
+            Price: {{book.price| currency}}
+
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+    </mat-card-actions>
+</mat-card>
