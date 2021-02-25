@@ -1,4 +1,19 @@
 <h2> Book -List</h2>
+<div>
+    <form enctype="multipart/form-data" [formGroup]="bookForm" (ngSubmit)="onFormSubmit()">
+        Search for Book By Title<input type="text" formControlName="title">
+        <mat-form-field appearance="fill">
+            <mat-label>Categories</mat-label>
+            <mat-select multiple formControlName="categories">
+                <mat-option *ngFor="let category of categories" [value]="category.categoryName">
+                    {{category.categoryName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="primary">Search</button>
+    </form>
+
+</div>
 <div class="flex-container">
     <div *ngFor="let book of books">
         <app-book-card [book]="book"></app-book-card>
@@ -11,7 +26,8 @@
     total records: {{responseData?.totalRecords}}
 </div>
 <button class="btn btn-primary" type="button" (click)="next()"
-    [disabled]="responseData.pageNumber>=responseData.totalPages"> Next </button>
+    [disabled]="responseData===undefined?true: responseData.pageNumber>=responseData.totalPages"> Next </button>
 
-<button class="btn btn-primary" type="button" (click)="prev()"> Prev </button>
-<a [routerLink]="['book']" [queryParams]="{ pageNumber:2 }">Page 2</a>
+<button class="btn btn-primary" type="button" (click)="prev()"
+    [disabled]="responseData===undefined?true: responseData.pageNumber<=1"> Prev </button>
+<!-- <a [routerLink]="['book']" [queryParams]="{ pageNumber:2 }">Page 2</a> -->

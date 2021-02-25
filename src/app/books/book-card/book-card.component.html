@@ -4,12 +4,15 @@
         <mat-card-title>{{book.title}}</mat-card-title>
         <!-- <mat-card-subtitle>{{book.author}}</mat-card-subtitle> -->
     </mat-card-header>
-    <img mat-card-image src="{{environment.apiUrl}}/Images/{{book.coverFileName}}" alt=" book cover image">
+    <img mat-card-image src="{{environment.apiUrl}}/Images/{{book.coverFileName}}" alt=" book cover image"
+        onerror="this.onerror= null; this.src='../../../assets/1.jpg'">
     <mat-card-content>
         <div style="width:100%;  text-align: left;">
             Author: {{book.author| personName: true}}
             <br>
             Price: {{book.price| currency}}
+            <br>
+            Category:{{book.category}}
 
         </div>
     </mat-card-content>

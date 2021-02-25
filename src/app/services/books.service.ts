@@ -3,12 +3,12 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environments/environment'
 import { Book } from '../models/book.model';
-import { Categories } from '../models/categories.model';
+import { Category } from '../models/categories.model';
 import { map, shareReplay } from 'rxjs/operators';
 
 import { ResponseData } from '../models/response';
 
-const baseUrl = `${environment.apiUrl}/api/book`;
+const baseUrl = `${environment.apiUrl}/api/book/`;
 //const baseUrl = `/api/books`;
 @Injectable({
   providedIn: 'root'
@@ -17,14 +17,22 @@ export class BooksService {
 
   constructor(private http: HttpClient) { }
 
-  categories$ = this.http.get<Categories[]>(baseUrl + 'GetCategoriesList').pipe(shareReplay(1));
+  categories$ = this.http.get<Category[]>(baseUrl + 'GetCategoriesList').pipe(shareReplay(1));
 
   books$ = this.getAllBooks().pipe(shareReplay(1));
   response: any;
-  //    pageNumber: number; pageSize: number;
-  getAll(pageNumber: number = 1, pageSize: number = 4) {
 
-    return this.http.get<ResponseData>(baseUrl + `?pageNumber=${pageNumber}&pageSize=${pageSize}`);
+  //    pageNumber: number; pageSize: number;
+  getAll(param: any) {
+
+    let paramString: string = `?pageNumber=${param.pageNumber}&pageSize=${param.pageSize}`;
+    if (param?.title) {
+      paramString += `&title=${param.title}`
+    }
+    if (param?.categories) {
+      paramString += `&category=${param.categories}`
+    }
+    return this.http.get<ResponseData>(baseUrl + paramString);
   }
 
   getAllBooks() {
@@ -52,4 +60,7 @@ export class BooksService {
   }
 
 
+  getCategories() {
+    return this.http.get<Category[]>(baseUrl + 'GetCategories').pipe(shareReplay(1));
+  }
 }

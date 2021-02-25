@@ -19,4 +19,8 @@ export class BookCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  loadErrorImage(event: any) {
+    console.log('event=', event);
+  }
+
 }
